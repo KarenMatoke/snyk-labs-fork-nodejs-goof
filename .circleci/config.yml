@@ -1,17 +1,12 @@
-version: 2.1
+version: '2.1'
 orbs:
   snyk: snyk/snyk@1.1.2
-
 jobs:
-  snyk-scan:
+  build:
     docker:
-      - image: cimg/openjdk:11.0
-    steps:    
+      - image: cimg/node:lts
+    steps:
       - checkout
-      - run: mvn install -X
+      - run: npm ci
       - snyk/scan
-
-workflows:
-  build-snyk:
-    jobs:
-      - snyk-scan
+workflows: null
